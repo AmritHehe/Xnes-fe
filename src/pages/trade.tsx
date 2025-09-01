@@ -54,7 +54,7 @@ export function Trade() {
     //@ts-ignore
     
     const chart = createChart(chartRef.current , { 
-      width : 1000 ,
+      width : 800 ,
       height : 500 , 
       layout : { 
         // background : { color :'#000000' }, 
@@ -241,40 +241,95 @@ async function closeTheOrder(orderId : any , tradetype :any , quantity : any , l
     
   return (
     <>
-      <div className='w-full h-full flex '>
-            {/* <h1 className=' text-white font-bold justify-center items-center'>hello Super30</h1> */}
-            <div id='container' ref = {chartRef} className='w-full h-full'></div>
-             <div> 
-               sell price : {price}
-               <br></br>
-               buy Price : {buyPrice}
-              <br />
-              <br />
+    <div className="w-screen h-screen bg-slate-950">
+            <header className="w-full flex justify-between px-10">
+                <h1 className="h1 flex text-4xl w-4/5 font-bold text-white items-start p-5 bg-slate-950">EXNESS</h1>
+                <div className="flex flex-col justify-center items-center p-2  m-2">
+                    <h3 className="text-white">balance</h3>
+                    <p className="text-white text-2xl  font-extrabold">{balance?.toFixed(2)}</p>
+                </div>
+                <button className="text-white text-xl font-bold rounded-xl my-4 bg-indigo-400 px-8 mx-2"> user </button>
+                <button className=" text-amber-50 bg-amber-100 px-12 rounded-xl my-4 mx-2 bg-indigo-400">Add $$$$</button>
+            </header>
+            <div className="w-full flex  ">
+                <div className="bg- flex flex-col w-1/4 items-center justify-start  mr-2 p-5 border-2 border-amber-200 rounded-xl">
+                  <div className="flex justify-between w-full text-white font-bold">
+                    <h3 className="text-xl m-2  w-1/3"> SYMBOL</h3>
+                    <h3 className="text-xl m-2"> BID</h3>
+                    <h3 className="text-xl m-2"> ASK</h3>
+                  </div>
+                  <div className="flex justify-between w-full text-white font-bold">
+                    <h3 className="text-xl m-2  w-1/3"> BTC</h3>
+                    <h3 className="m-2"> {price}</h3>
+                    <h3 className="m-2"> {buyPrice}</h3>
+                  </div>
 
-              volume
-              <input  className='p-2 m-2' value={qty} onChange={(e)=> {setQty(Number(e.target.value))}} type="number" placeholder='qty'/>
-              leverage
-              <input  className='p-2 m-2' value={leverage} onChange={(e)=>{setLeverage(Number(e.target.value))}} type="number" placeholder='leverage' />
-              <button onClick={buyOrder} className='p-2 m-2' >Buy</button>
-              <button onClick={sellOrder} className='p-2 m-2' >sell</button>
-              <div>
-                <h1 className=' text-7xl font-bold'>
-                  Balance  : {(balance)?.toFixed(2)}
-                </h1>
-              </div>
-              </div>
-              
-      </div>   
-      <div>
-                <h2 className=" p-2 m-2 font-bold "> ASSET TPYE QUANTITY OPENPRICE CURRENTPRICE  PROFIT/LOSS </h2>
-                <ul>               
+                </div>
+                <div className=" bg-amber-500 flex items-start justify-end overflow-hidden rounded-xl">
+                    <div id='container' ref = {chartRef} className=' bg-amber-400 '></div>
+                </div>
+                <div className="w-1/5 ml-4 m-2 border-2 border-amber-200 rounded-xl" >
+                    <div className="flex items-center ">
+                        <button onClick={sellOrder} className="text-white py-5 px-8 border-2 border-red-800 rounded-xl m-1.5 flex flex-col">SELL
+                            <br />
+                            {(Number(price)).toFixed(2)}
+
+                        </button>
+                        <button onClick={buyOrder} className="text-white py-5 px-8 border-2 border-indigo-500 rounded-xl m-1.5 flex flex-col">BUY
+                            <br />
+                            {(Number(buyPrice)).toFixed(2)}
+                        </button>                
+                    </div>
+                    <div className="flex flex-col ">
+                        <p className="text-2xl text-white font-bold p-1 m-2">Volume</p>
+                        <input  className='py-2 px-6 m-2 border-2 rounded-xl text-white  border-zinc-700' value={qty} onChange={(e)=> {setQty(Number(e.target.value))}} type="number" placeholder='qty'/>
+                    </div> 
+                    <div className="flex flex-col ">
+                        <p className="text-2xl text-white font-bold p-1 m-2">Leverage</p>
+                        <input  className='py-2 px-6 m-2 border-2 rounded-xl text-white  border-zinc-700' value={leverage} onChange={(e)=>{setLeverage(Number(e.target.value))}} type="number" placeholder='leverage' />
+                    </div>
+                    
+                </div>
+            </div>
+            <div className="flex flex-col items-center">
+                <h2 className=" p-2 m-2 font-bold text-white "> ASSET TPYE QUANTITY OPENPRICE CURRENTPRICE  PROFIT/LOSS </h2>
+                <ul className="text-white text-md">
                     
                     {openOrders.map(d=>(<li key={d.orderId} className="p-2 m-2 font-bold text-large">btc {d.tradeType} {d.quantity} {(Number(d.buyPrice/d.quantity)).toFixed(2)} {(Number(price)).toFixed(2)} {d.tradeType =='buy' ?  (d.l > 1  ? (Number((price*d.quantity*d.l)-(d.buyPrice*d.l))).toFixed(2) :((Number((price*d.quantity)-d.buyPrice)).toFixed(2))) :( d.l > 1  ? (Number((d.buyPrice*d.l)-(buyPrice*d.quantity*d.l))).toFixed(2) :((Number(d.buyPrice -(buyPrice*d.quantity))).toFixed(2)))} <button onClick={()=>closeTheOrder(d.orderId , d.tradeType , d.quantity , d.leverage  , d.buyPrice , d.l)}>close order</button> </li>))}
+                </ul>
+            </div>
                 
-                </ul>              
                 
-              </div>
-      
+            {/* <div> 
+                sell price : {price}
+                <br></br>
+                buy Price : {buyPrice}
+                <br />
+                <br />
+
+                volume
+                <input  className='p-2 m-2' value={qty} onChange={(e)=> {setQty(Number(e.target.value))}} type="number" placeholder='qty'/>
+                leverage
+                <input  className='p-2 m-2' value={leverage} onChange={(e)=>{setLeverage(Number(e.target.value))}} type="number" placeholder='leverage' />
+                <button onClick={buyOrder} className='p-2 m-2' >Buy</button>
+                <button onClick={sellOrder} className='p-2 m-2' >sell</button>
+                <div>
+                    <h1 className=' text-7xl font-bold'>
+                    Balance  : {(balance)?.toFixed(2)}
+                    </h1>
+                </div>
+            </div> */}
+
+                {/* <div>
+                    <h2 className=" p-2 m-2 font-bold "> ASSET TPYE QUANTITY OPENPRICE CURRENTPRICE  PROFIT/LOSS </h2>
+                    <ul>               
+                        
+                        {openOrders.map(d=>(<li key={d.orderId} className="p-2 m-2 font-bold text-large">btc {d.tradeType} {d.quantity} {(Number(d.buyPrice/d.quantity)).toFixed(2)} {(Number(price)).toFixed(2)} {d.tradeType =='buy' ?  (d.l > 1  ? (Number((price*d.quantity*d.l)-(d.buyPrice*d.l))).toFixed(2) :((Number((price*d.quantity)-d.buyPrice)).toFixed(2))) :( d.l > 1  ? (Number((d.buyPrice*d.l)-(buyPrice*d.quantity*d.l))).toFixed(2) :((Number(d.buyPrice -(buyPrice*d.quantity))).toFixed(2)))} <button onClick={()=>closeTheOrder(d.orderId , d.tradeType , d.quantity , d.leverage  , d.buyPrice , d.l)}>close order</button> </li>))}
+                    
+                    </ul>              
+                    
+                </div> */}
+      </div>
     </>
   )
 }
