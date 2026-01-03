@@ -5,9 +5,10 @@ import { Moon, Sun, User, Wallet, Bell, Bitcoin } from "lucide-react";
 interface NavbarProps {
     balance?: number;
     price?: number;
+    buyPrice?: number;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ balance, price = 0 }) => {
+export const Navbar: React.FC<NavbarProps> = ({ balance, price = 0, buyPrice = 0 }) => {
     const [isDark, setIsDark] = useState(false);
 
     // Flash Effects
@@ -49,15 +50,21 @@ export const Navbar: React.FC<NavbarProps> = ({ balance, price = 0 }) => {
         }
     };
 
-    // Calculate Long/Short prices (Spread) - Using real price
+    // Calculate Long/Short prices
+    // Logic: 
+    // - Long (Buy) = buyPrice (from WS)
+    // - Short (Sell) = buyPrice - 20 (as requested by user)
+    // - Mark Price = price (from WS)
+    // Fallback: Use price if buyPrice is 0 or undefined
     const displayPrice = price > 0 ? price : 0;
-    const longPrice = displayPrice * 1.0001;
-    const shortPrice = displayPrice * 0.9999;
+    const longPrice = buyPrice > 0 ? buyPrice : displayPrice;
+    const shortPrice = longPrice - 20;
 
     return (
         <header className="w-full h-14 border-b border-border bg-card flex items-center justify-between px-4 z-40">
             {/* Left: Ticker & Logo */}
             <div className="flex items-center gap-6">
+                {/* Bitcoin Logo - Inverted (Orange Icon) */}
                 <div className="flex items-center gap-3">
                     <div className="w-8 h-8 rounded-full bg-orange-500/10 flex items-center justify-center">
                         <Bitcoin className="text-[#F7931A] w-6 h-6 rotate-12" />
@@ -82,14 +89,14 @@ export const Navbar: React.FC<NavbarProps> = ({ balance, price = 0 }) => {
                 </div>
 
                 <div className="hidden lg:flex items-center gap-2 text-xs font-mono">
-                    {/* Long Price - Flashes Green BG on UP */}
+                    {/* Long Price - Flashes Green BG on UP - NO SCALE */}
                     <div className={`flex flex-col items-end px-2 py-1 rounded transition-colors duration-200 ${flashState === 'up' ? 'bg-up/30 text-up-foreground' : 'bg-transparent text-muted-foreground'}`}>
-                        <span className={`font-bold ${flashState === 'up' ? 'text-up scale-110' : 'text-foreground'} transition-all`}>{longPrice.toFixed(2)}</span>
+                        <span className={`font-bold ${flashState === 'up' ? 'text-up' : 'text-foreground'} transition-colors`}>{longPrice.toFixed(2)}</span>
                         <span className="text-[10px]">Long</span>
                     </div>
-                    {/* Short Price - Flashes Red BG on DOWN */}
+                    {/* Short Price - Flashes Red BG on DOWN - NO SCALE */}
                     <div className={`flex flex-col items-end px-2 py-1 rounded transition-colors duration-200 ${flashState === 'down' ? 'bg-down/30 text-down-foreground' : 'bg-transparent text-muted-foreground'}`}>
-                        <span className={`font-bold ${flashState === 'down' ? 'text-down scale-110' : 'text-foreground'} transition-all`}>{shortPrice.toFixed(2)}</span>
+                        <span className={`font-bold ${flashState === 'down' ? 'text-down' : 'text-foreground'} transition-colors`}>{shortPrice.toFixed(2)}</span>
                         <span className="text-[10px]">Short</span>
                     </div>
                 </div>
