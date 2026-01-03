@@ -1,1 +1,150 @@
 @import "tailwindcss";
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@theme {
+    --font-sans: 'Inter', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+}
+
+@layer base {
+    :root {
+        /* Light Mode (Professional White) */
+        --background: 255 255 255;
+        --foreground: 18 18 18;
+        /* Nearly Black */
+
+        --card: 255 255 255;
+        --card-foreground: 18 18 18;
+
+        --popover: 255 255 255;
+        --popover-foreground: 18 18 18;
+
+        --primary: 18 18 18;
+        --primary-foreground: 255 255 255;
+
+        --secondary: 240 242 245;
+        /* Slight gray for panels */
+        --secondary-foreground: 18 18 18;
+
+        --muted: 240 242 245;
+        --muted-foreground: 100 116 139;
+        /* Slate 500 */
+
+        --accent: 240 242 245;
+        --accent-foreground: 18 18 18;
+
+        --destructive: 239 68 68;
+        --destructive-foreground: 255 255 255;
+
+        --border: 226 232 240;
+        /* Slate 200 */
+        --input: 226 232 240;
+        --ring: 18 18 18;
+
+        --radius: 0px;
+        /* Sharp corners for Pro feel */
+
+        /* Trading Colors */
+        --up: 0 200 83;
+        /* Sharp Green */
+        --down: 255 61 0;
+        /* Sharp Red */
+    }
+
+    .dark {
+        /* Dark Mode (Pro Terminal Black) */
+        --background: 0 0 0;
+        /* Pure Black */
+        --foreground: 236 237 238;
+        /* Off-white text */
+
+        --card: 9 9 11;
+        /* Zinc 950 - slightly lighter than bg for hierarchy */
+        --card-foreground: 236 237 238;
+
+        --popover: 9 9 11;
+        --popover-foreground: 236 237 238;
+
+        --primary: 255 255 255;
+        --primary-foreground: 0 0 0;
+
+        --secondary: 24 24 27;
+        /* Zinc 900 */
+        --secondary-foreground: 236 237 238;
+
+        --muted: 24 24 27;
+        --muted-foreground: 113 113 122;
+        /* Zinc 500 */
+
+        --accent: 39 39 42;
+        /* Zinc 800 */
+        --accent-foreground: 236 237 238;
+
+        --destructive: 127 29 29;
+        --destructive-foreground: 255 255 255;
+
+        --border: 39 39 42;
+        /* Zinc 800 */
+        --input: 39 39 42;
+        --ring: 212 212 216;
+
+        /* Trading Colors */
+        --up: 0 240 144;
+        /* Neon Green */
+        --down: 255 46 80;
+        /* Neon Red */
+    }
+}
+
+@layer base {
+    body {
+        @apply bg-[rgb(var(--background))] text-[rgb(var(--foreground))] antialiased transition-colors duration-0;
+        font-feature-settings: "rlig" 1, "calt" 1;
+    }
+
+    /* Custom Scrollbar for Pro look */
+    ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: rgba(113, 113, 122, 0.2);
+        border-radius: 9999px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background-color: rgba(113, 113, 122, 0.4);
+    }
+}
+
+@layer utilities {
+    .text-up {
+        color: rgb(var(--up));
+    }
+
+    .text-down {
+        color: rgb(var(--down));
+    }
+
+    .bg-up {
+        background-color: rgb(var(--up));
+    }
+
+    .bg-down {
+        background-color: rgb(var(--down));
+    }
+
+    .border-up {
+        border-color: rgb(var(--up));
+    }
+
+    .border-down {
+        border-color: rgb(var(--down));
+    }
+}
