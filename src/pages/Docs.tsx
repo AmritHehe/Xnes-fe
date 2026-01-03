@@ -1,5 +1,6 @@
 
 import { Layout } from "../components/layout/Layout";
+import { Helmet } from "react-helmet-async";
 import { TrendingUp, TrendingDown, AlertTriangle, Play } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/Card";
 
@@ -8,6 +9,10 @@ export default function Docs() {
         <Layout>
             <div className="max-w-4xl mx-auto p-6 space-y-8">
                 <div className="space-y-2">
+                    <Helmet>
+                        <title>How to Trade | Apex Academy</title>
+                        <meta name="description" content="Master crypto trading with Apex. Learn about leverage, liquidation, long vs short positions, and risk management." />
+                    </Helmet>
                     <h1 className="text-4xl font-bold tracking-tight">Trading Guide</h1>
                     <p className="text-muted-foreground text-lg">Master the fundamentals of professional crypto trading.</p>
                 </div>

@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../components/ui/Button";
 import { CandlestickChart } from "lucide-react";
+import { Helmet } from "react-helmet-async";
 
 export function SignUp() {
     const [username, setUsername] = useState<string>("");
@@ -29,6 +30,10 @@ export function SignUp() {
 
     return (
         <div className="min-h-screen bg-background text-foreground flex flex-col items-center justify-center p-4">
+            <Helmet>
+                <title>Create Account | Apex Terminal</title>
+                <meta name="description" content="Join Apex today. Start trading with zero latency, 100x leverage, and deep liquidity." />
+            </Helmet>
             <div className="w-full max-w-sm space-y-8">
                 <div className="flex flex-col items-center">
                     <div className="p-3 bg-primary text-primary-foreground rounded-lg mb-4">

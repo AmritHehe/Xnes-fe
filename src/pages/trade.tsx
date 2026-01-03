@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import axios from "axios";
 import { Layout } from "../components/layout/Layout";
 import { TradingChart } from "../components/features/trade/TradingChart";
@@ -116,6 +117,10 @@ export function Trade() {
 
     return (
         <Layout balance={balance} price={price} buyPrice={buyPrice}>
+            <Helmet>
+                <title>Trade BTC/USD | Apex Terminal</title>
+                <meta name="description" content="Professional trading interface for BTC/USD on Apex. Real-time charts, instant execution, and advanced order types." />
+            </Helmet>
             <div className="flex h-full w-full overflow-hidden">
                 {/* Main Content Area: Chart and Positions */}
                 <div className="flex-1 flex flex-col h-full min-w-0">
