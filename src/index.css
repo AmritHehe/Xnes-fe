@@ -5,6 +5,41 @@
 @theme {
     --font-sans: 'Inter', system-ui, sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
+
+    --color-background: rgb(var(--background));
+    --color-foreground: rgb(var(--foreground));
+
+    --color-card: rgb(var(--card));
+    --color-card-foreground: rgb(var(--card-foreground));
+
+    --color-popover: rgb(var(--popover));
+    --color-popover-foreground: rgb(var(--popover-foreground));
+
+    --color-primary: rgb(var(--primary));
+    --color-primary-foreground: rgb(var(--primary-foreground));
+
+    --color-secondary: rgb(var(--secondary));
+    --color-secondary-foreground: rgb(var(--secondary-foreground));
+
+    --color-muted: rgb(var(--muted));
+    --color-muted-foreground: rgb(var(--muted-foreground));
+
+    --color-accent: rgb(var(--accent));
+    --color-accent-foreground: rgb(var(--accent-foreground));
+
+    --color-destructive: rgb(var(--destructive));
+    --color-destructive-foreground: rgb(var(--destructive-foreground));
+
+    --color-border: rgb(var(--border));
+    --color-input: rgb(var(--input));
+    --color-ring: rgb(var(--ring));
+
+    --color-up: rgb(var(--up));
+    --color-down: rgb(var(--down));
+
+    --radius-lg: var(--radius);
+    --radius-md: calc(var(--radius) - 2px);
+    --radius-sm: calc(var(--radius) - 4px);
 }
 
 @layer base {
@@ -28,7 +63,8 @@
         --secondary-foreground: 18 18 18;
 
         --muted: 240 242 245;
-        --muted-foreground: 100 116 139;
+        --muted-foreground: 71 85 105;
+        /* Slate 600 - Darker for better contrast */
         /* Slate 500 */
 
         --accent: 240 242 245;

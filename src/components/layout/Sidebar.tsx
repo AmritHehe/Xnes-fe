@@ -22,7 +22,7 @@ export const Sidebar = () => {
     return (
         <aside className="w-14 lg:w-16 h-screen flex flex-col items-center border-r border-border bg-card py-4 z-50">
             {/* Logo Icon */}
-            <div className="mb-8 p-2 rounded-lg bg-primary text-primary-foreground">
+            <div className="mb-8 p-2 rounded-lg bg-primary-foreground border border-border text-primary shadow-sm">
                 <CandlestickChart className="w-6 h-6" />
             </div>
 

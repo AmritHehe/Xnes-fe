@@ -115,7 +115,7 @@ export function Trade() {
     };
 
     return (
-        <Layout balance={balance}>
+        <Layout balance={balance} price={price}>
             <div className="flex h-full w-full overflow-hidden">
                 {/* Main Content Area: Chart and Positions */}
                 <div className="flex-1 flex flex-col h-full min-w-0">
